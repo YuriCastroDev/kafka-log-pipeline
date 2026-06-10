@@ -29,6 +29,8 @@ spring:
       value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
       properties:
         spring.json.trusted.packages: "com.zs.kafka_log_pipeline.*"
+        spring.json.use.type.headers: false
+        spring.json.value.default.type: com.zs.kafka_log_pipeline.event.AlertEvent
     streams:
       application-id: kafka-log-pipeline
       bootstrap-servers: localhost:9092

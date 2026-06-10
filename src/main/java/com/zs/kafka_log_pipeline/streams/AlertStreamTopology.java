@@ -2,7 +2,6 @@ package com.zs.kafka_log_pipeline.streams;
 
 import com.zs.kafka_log_pipeline.event.AlertEvent;
 import com.zs.kafka_log_pipeline.event.LogEvent;
-import com.zs.kafka_log_pipeline.event.LogLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.common.serialization.Serde;
