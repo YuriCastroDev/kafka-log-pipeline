@@ -2,6 +2,7 @@ package com.zs.kafka_log_pipeline.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import com.zs.kafka_log_pipeline.event.AlertEvent;
 import com.zs.kafka_log_pipeline.event.LogEvent;
 import org.apache.kafka.common.serialization.Deserializer;
 import org.apache.kafka.common.serialization.Serde;
@@ -53,6 +54,30 @@ public class KafkaStreamsConfig {
                 return mapper.readValue(data, LogEvent.class);
             } catch (Exception e) {
                 throw new RuntimeException("Error deserializing LogEvent", e);
+            }
+        };
+
+        return Serdes.serdeFrom(serializer, deserializer);
+    }
+
+    @Bean
+    public Serde<AlertEvent> alertEventSerde() {
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.registerModule(new JavaTimeModule());
+
+        Serializer<AlertEvent> serializer = (topic, data) -> {
+            try {
+                return mapper.writeValueAsBytes(data);
+            } catch (Exception e) {
+                throw new RuntimeException("Error serializing AlertEvent", e);
+            }
+        };
+
+        Deserializer<AlertEvent> deserializer = (topic, data) -> {
+            try {
+                return mapper.readValue(data, AlertEvent.class);
+            } catch (Exception e) {
+                throw new RuntimeException("Error deserializing AlertEvent", e);
             }
         };
 

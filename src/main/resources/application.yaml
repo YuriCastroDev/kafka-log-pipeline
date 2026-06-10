@@ -47,5 +47,5 @@ app:
       info-logs: info-logs
       alerts: alerts
     alert:
-      error-threshold: 10
+      error-threshold: 3
       window-size-seconds: 60
